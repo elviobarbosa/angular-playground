@@ -1,0 +1,18 @@
+<fieldset [formGroupName]="controlKey()">
+  <legend>Escolha</legend>
+  <select formControlName="tipo">
+    <option value="1">PF</option>
+    <option value="2">PJ</option>
+  </select>
+</fieldset>
+<form [formGroup]="form">
+<base-autocomplete
+  endpoint="https://rickandmortyapi.com/api/character"
+  label="Personagem"
+  displayKey="name"
+  subDisplayKey="status"
+  [control]="form.controls.personagem"
+  (optionSelected)="foo($event)"
+/>
+</form>
+{{form.getRawValue() | json}}
