@@ -1,6 +1,5 @@
 import {
   Directive,
-  Input,
   HostListener,
   OnInit,
   inject,
@@ -8,27 +7,28 @@ import {
   Output,
   EventEmitter,
   forwardRef,
-input,
-} from '@angular/core';
+  Input,
+  input,
+} from "@angular/core";
 
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { FormControl } from '@angular/forms';
+import { FormControl } from "@angular/forms";
 import {
   debounceTime,
   distinctUntilChanged,
   filter,
   switchMap,
   tap,
-} from 'rxjs';
-import { AutocompleteService } from '../services/auto-complete.service';
+} from "rxjs";
+import { AutocompleteService } from "../services/auto-complete.service";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 
 @Directive({
-  selector: '[baseAutocomplete]',
+  selector: "[baseAutocomplete]",
   standalone: true,
-  exportAs: 'baseAutocompleteApi',
+  exportAs: "baseAutocompleteApi",
   providers: [
     {
-      provide: 'baseAutocompleteApi',
+      provide: "baseAutocompleteApi",
       useExisting: forwardRef(() => BaseAutocompleteDirective),
     },
   ],
@@ -40,7 +40,7 @@ export class BaseAutocompleteDirective implements OnInit {
   @Input() endpoint!: string;
   @Input() params?: Record<string, any>;
 
-  @Input() displayKey: string = 'label';
+  @Input() displayKey: string = "label";
   @Input() subDisplayKey?: string;
 
   @Input() displayFn?: (item: any) => string;
@@ -56,8 +56,9 @@ export class BaseAutocompleteDirective implements OnInit {
   }
 
   private listenToTyping() {
-    this.control()?.valueChanges
-      .pipe(
+    console.log(this.control());
+    this.control()
+      ?.valueChanges.pipe(
         filter((v) => !!v && v.length > 1),
         debounceTime(300),
         distinctUntilChanged(),
@@ -68,6 +69,7 @@ export class BaseAutocompleteDirective implements OnInit {
         tap(() => (this.loading = false))
       )
       .subscribe((res) => {
+        console.log(res);
         this.results = (Array.isArray(res) ? res : (res as any).results) ?? [];
       });
   }
@@ -77,7 +79,7 @@ export class BaseAutocompleteDirective implements OnInit {
   }
 
   format(item: any): string {
-    if (!item) return '';
+    if (!item) return "";
     if (this.displayFn) return this.displayFn(item);
 
     if (this.subDisplayKey) {

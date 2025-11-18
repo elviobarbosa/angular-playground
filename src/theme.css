@@ -1,0 +1,17 @@
+:root {
+  /* Cores principais */
+  --md-sys-color-primary: #6750a4;
+  --md-sys-color-primary-container: #eaddff;
+
+  --md-sys-color-secondary: #625b71;
+  --md-sys-color-secondary-container: #e8def8;
+
+  --md-sys-color-tertiary: #7d5260;
+  --md-sys-color-tertiary-container: #ffd8e4;
+
+  --md-sys-color-error: #b3261e;
+
+  /* Background / surface */
+  --md-sys-color-surface: #fffbfe;
+  --md-sys-color-on-surface: #1c1b1f;
+}
