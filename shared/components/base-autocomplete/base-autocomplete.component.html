@@ -1,0 +1,29 @@
+<mat-form-field class="example-full-width">
+  <mat-label>{{ label() }}</mat-label>
+
+  <input
+    matInput
+    [placeholder]="placeholder()"
+    baseAutocomplete
+    [endpoint]="endpoint()"
+    [displayKey]="displayKey()"
+    [subDisplayKey]="subDisplayKey()"
+    [params]="params()"
+    (optionSelected)="optionSelected.emit($event)"
+    [formControl]="control()"
+    [matAutocomplete]="auto"
+    #dir="baseAutocompleteApi"
+  />
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="dir.onSelect($event)"
+    [displayWith]="dir.format.bind(dir)"
+  >
+    @for (item of dir.results; track item.id) {
+    <mat-option [value]="item">
+      {{ dir.format(item) }}
+    </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

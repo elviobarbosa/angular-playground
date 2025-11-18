@@ -1,0 +1,59 @@
+<div class="container">
+<h2>Exemplo de Cache em Angular</h2>
+
+<div class="actions">
+  <button (click)="carregarDados()" [disabled]="loading">Carregar Posts</button>
+  <button (click)="carregarUsuarios()" [disabled]="loading">Carregar Usuários</button>
+  <button (click)="limparCache()">Limpar Cache</button>
+</div>
+
+@if(loading) {
+<div class="loading">
+  <p>Carregando...</p>
+</div>
+}
+
+@if (!loading) {
+<div class="content">
+  @if (posts.length > 0) {
+  <div class="posts">
+    <h3>Posts</h3>
+    <ul>
+      @for (post of posts; track post.id) {
+      <li>
+        <strong>{{ post.title }}</strong>
+        <button (click)="mostrarPost(post.id)">Ver detalhes</button>
+      </li>
+    }
+    </ul>
+  </div>
+  }
+  
+  @if (users.length > 0) {
+  <div class="users" >
+    <h3>Usuários</h3>
+    <ul>
+      @for (user of users; track user.email) {
+      <li>
+        <strong>{{ user.name }}</strong> - {{ user.email }}
+      </li>
+     }
+    </ul>
+  </div>
+  }
+  
+  @if (currentPost) {
+  <div class="post-details">
+    <h3>Detalhes do Post</h3>
+    <div class="card">
+      <h4>{{ currentPost.title }}</h4>
+      <p>{{ currentPost.body }}</p>
+      <p><small>ID: {{ currentPost.id }} - Usuário: {{ currentPost.userId }}</small></p>
+    </div>
+  </div>
+  }
+</div>
+}
+
+
+</div>
