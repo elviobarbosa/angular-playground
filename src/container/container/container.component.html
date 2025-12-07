@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="handlerSubmit()" style="display: flex;">
+  <div style="width: 50%;">
+    <app-test-cache />
+  </div>
+  <div>
+    <app-form-one controlKey="tipoPessoa" />
+    <app-form-two controlKey="deliveryAddress" />
+    <button>Vai</button>
+  </div>
+</form>
+
+{{ form.value | json }}
