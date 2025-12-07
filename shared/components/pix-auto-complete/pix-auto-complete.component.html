@@ -1,0 +1,17 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Chave Pix</mat-label>
+
+  <input matInput placeholder="Digite a chave pix" baseAutocomplete [endpoint]="endpoint + autoInput.value"
+    displayKey="key" [displayFn]="formatPixKeyDisplay" [params]="params()"
+    (optionSelected)="optionSelected.emit($event)" [formControl]="control()" [control]="control()"
+    [matAutocomplete]="auto" #dir="baseAutocompleteApi" #autoInput />
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="dir.onSelect($event)" [displayWith]="dir.format.bind(dir)"
+    [displayWith]="dir.format.bind(dir)">
+    @for (item of dir.results; track item.id) {
+    <mat-option [value]="item">
+      {{ dir.format(item) | pixKeyFormat:item.type}}
+    </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

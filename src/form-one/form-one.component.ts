@@ -1,19 +1,35 @@
-import { Component, inject, input, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, input, OnDestroy, OnInit } from "@angular/core";
 import {
   ControlContainer,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-Validators,
-} from '@angular/forms';
-import { BaseAutocompleteComponent } from '../../shared/components/base-autocomplete/base-autocomplete.component';
-import { JsonPipe } from '@angular/common';
+  Validators,
+} from "@angular/forms";
+import { BaseAutocompleteComponent } from "../../shared/components/base-autocomplete/base-autocomplete.component";
+import { JsonPipe } from "@angular/common";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import {
+  MatFormField,
+  MatFormFieldModule,
+  MatLabel,
+} from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { PixAutoCompleteComponent } from "../../shared/components/pix-auto-complete/pix-auto-complete.component";
 
 @Component({
-  selector: 'app-form-one',
-  imports: [ReactiveFormsModule, BaseAutocompleteComponent, JsonPipe],
-  templateUrl: './form-one.component.html',
-  styleUrl: './form-one.component.css',
+  selector: "app-form-one",
+  imports: [
+    ReactiveFormsModule,
+    BaseAutocompleteComponent,
+    JsonPipe,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    PixAutoCompleteComponent,
+  ],
+  templateUrl: "./form-one.component.html",
+  styleUrl: "./form-one.component.css",
   viewProviders: [
     {
       provide: ControlContainer,
@@ -26,9 +42,8 @@ export class FormOneComponent implements OnInit, OnDestroy {
   parentContainer = inject(ControlContainer);
 
   form = new FormGroup({
-    personagem: new FormControl(null, Validators.required)
+    personagem: new FormControl(null, Validators.required),
   });
-  
 
   get parentFormGroup() {
     return this.parentContainer.control as FormGroup;
@@ -38,7 +53,7 @@ export class FormOneComponent implements OnInit, OnDestroy {
     this.parentFormGroup.addControl(
       this.controlKey(),
       new FormGroup({
-        tipo: new FormControl(''),
+        tipo: new FormControl(""),
       })
     );
   }
@@ -52,8 +67,6 @@ export class FormOneComponent implements OnInit, OnDestroy {
   }
 
   displayPersonagem(item: any) {
-    return item ? `${item.name} | ${item.status}` : '';
+    return item ? `${item.name} | ${item.status}` : "";
   }
-  
-
 }

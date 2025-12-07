@@ -1,1 +1,27 @@
+// @use "@angular/material" as mat;
+
+// @include mat.core();
+
+// $my-primary: mat.define-palette(mat.$cyan-orange-palette);
+// $my-accent: mat.define-palette(mat.$pink-palette);
+
+// $theme: mat.define-light-theme(
+//   (
+//     color: (
+//       primary: $my-primary,
+//       accent: $my-accent,
+//     ),
+//   )
+// );
+
+// @include mat.all-component-themes($theme);
 @import "./theme.css";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

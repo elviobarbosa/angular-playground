@@ -1,42 +1,18 @@
-import { Component } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { FormTwoComponent } from './form-two/form-two.component';
-import { JsonPipe } from '@angular/common';
-import { FormOneComponent } from './form-one/form-one.component';
-import { TestCacheComponent } from './test-cache/test-cache.component';
-import { provideHttpClient } from '@angular/common/http';
+import { Component } from "@angular/core";
+import { bootstrapApplication } from "@angular/platform-browser";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { ContainerComponent } from "./container/container/container.component";
+import { mockInterceptor } from "./mocks/mock.interceptors";
 
 @Component({
-  selector: 'app-root',
-  imports: [
-    ReactiveFormsModule,
-    FormTwoComponent,
-    JsonPipe,
-    FormOneComponent,
-    TestCacheComponent,
-  ],
-  template: `
-  <form [formGroup]="form" (ngSubmit)="handlerSubmit()"> 
-    <app-test-cache />
-    <app-form-one controlKey="tipoPessoa" />
-    <app-form-two controlKey="deliveryAddress"/>
-    <button>Vai</button>
-  </form>
-
-  {{form.value | json}}
-  `,
+  selector: "app-root",
+  imports: [ContainerComponent],
+  template: ` <app-container /> `,
 })
 export class App {
-  name = 'Angular';
-  form = new FormGroup({});
-  handlerSubmit() {
-    console.log(this.form.getRawValue());
-  }
+  name = "Angular";
 }
 
-bootstrapApplication(App,{
-  providers: [
-    provideHttpClient() 
-  ]
-} );
+bootstrapApplication(App, {
+  providers: [provideHttpClient(withInterceptors([mockInterceptor]))],
+});
