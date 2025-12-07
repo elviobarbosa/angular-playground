@@ -55,24 +55,60 @@ export class BaseAutocompleteDirective implements OnInit {
     this.listenToTyping();
   }
 
+  // BaseAutocompleteDirective (CORRETO)
+  // BaseAutocompleteDirective
+
   private listenToTyping() {
     console.log(this.control());
+
     this.control()
       ?.valueChanges.pipe(
+        // Filtra valores nulos/vazios e exige mais de 1 caractere para iniciar a busca.
+        // Se a máscara estiver configurada para limpar o valor (somente dígitos) no control(),
+        // este filtro deve funcionar bem.
         filter((v) => !!v && v.length > 1),
+
+        // Espera 300ms antes de emitir o valor (evita chamadas excessivas durante a digitação rápida)
         debounceTime(300),
+
+        // Garante que a busca só ocorra se o valor for diferente da busca anterior
         distinctUntilChanged(),
+
+        // Marca o estado como carregando antes de fazer a chamada de API
         tap(() => (this.loading = true)),
+
+        // Cancela a requisição anterior se uma nova digitação ocorrer (evita condições de corrida)
         switchMap((term) =>
           this.service.search(this.endpoint, term!, this.params)
         ),
+
+        // Marca o estado como carregado após a conclusão da chamada
         tap(() => (this.loading = false))
       )
       .subscribe((res) => {
         console.log(res);
+        // Atualiza a lista de resultados, tratando se a resposta é um array ou um objeto com a chave 'results'
         this.results = (Array.isArray(res) ? res : (res as any).results) ?? [];
       });
   }
+  // private listenToTyping() {
+  //   console.log(this.control());
+  //   this.control()
+  //     ?.valueChanges.pipe(
+  //       filter((v) => !!v && v.length > 1),
+  //       debounceTime(300),
+  //       distinctUntilChanged(),
+  //       tap(() => (this.loading = true)),
+  //       switchMap((term) =>
+  //         this.service.search(this.endpoint, term!, this.params)
+  //       ),
+  //       tap(() => (this.loading = false))
+  //     )
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //       this.results = (Array.isArray(res) ? res : (res as any).results) ?? [];
+  //     });
+  // }
 
   onSelect(event: MatAutocompleteSelectedEvent) {
     this.optionSelected.emit(event.option.value);

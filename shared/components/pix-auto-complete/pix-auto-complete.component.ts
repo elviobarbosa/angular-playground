@@ -6,6 +6,7 @@ import { MatInputModule } from "@angular/material/input";
 import { BaseAutocompleteDirective } from "../../directives/auto-complete.directive";
 import { JsonPipe } from "@angular/common";
 import { PixKeyFormatPipe } from "../../pipes/pix-key-format.pipe";
+import { PixKeyInputFormatDirective } from "../../directives/pix-format-input.directive";
 
 @Component({
   selector: "pix-auto-complete",
@@ -16,6 +17,7 @@ import { PixKeyFormatPipe } from "../../pipes/pix-key-format.pipe";
     BaseAutocompleteDirective,
     ReactiveFormsModule,
     PixKeyFormatPipe,
+    PixKeyInputFormatDirective,
   ],
   templateUrl: "./pix-auto-complete.component.html",
   styleUrl: "./pix-auto-complete.component.css",
