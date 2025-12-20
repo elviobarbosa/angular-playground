@@ -1,0 +1,23 @@
+<mat-form-field>
+  <mat-label>CEP</mat-label>
+
+  <input matInput cepMask [formControl]="control()" cepAutocomplete #api="cepAuto" />
+
+  <mat-autocomplete (optionSelected)="onSelect($event.option.value)">
+    @for (item of api.results(); track item.cep) {
+    <mat-option [value]="item">
+      {{ item.logradouro }}
+    </mat-option>
+    }
+  </mat-autocomplete>
+
+  @if (api.showNoResults() || api.loading()) {
+  <mat-hint>
+    @if (api.showNoResults()) {
+    Nenhum CEP encontrado
+    } @else {
+    Carregando…
+    }
+  </mat-hint>
+  }
+</mat-form-field>

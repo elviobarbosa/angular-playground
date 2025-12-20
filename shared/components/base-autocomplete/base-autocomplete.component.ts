@@ -3,7 +3,7 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { BaseAutocompleteDirective } from "../../directives/auto-complete.directive";
+import { BaseAutocompleteDirective } from "../../directives/base-auto-complete/base-auto-complete.directive";
 import { JsonPipe } from "@angular/common";
 
 import { HttpParams } from "@angular/common/http";
@@ -14,7 +14,6 @@ import { HttpParams } from "@angular/common/http";
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    BaseAutocompleteDirective,
     ReactiveFormsModule,
   ],
   templateUrl: "./base-autocomplete.component.html",

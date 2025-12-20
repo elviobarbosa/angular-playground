@@ -1,11 +1,10 @@
-import { Component, input, output, signal } from "@angular/core";
+import { Component, input } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { BaseAutocompleteDirective } from "../../directives/auto-complete.directive";
-import { CepInputFormatDirective } from "../../directives/cep-format.directive";
-import { CepAutocompleteDirective } from "../../directives/cep-autocomplete.directive";
+import { CepAutocompleteDirective } from "../services/cep-autocomplete.directive";
+import { CepMaskDirective } from "../services/cep-mask.directive";
 
 @Component({
   selector: "cep-autocomplete",
@@ -15,21 +14,14 @@ import { CepAutocompleteDirective } from "../../directives/cep-autocomplete.dire
     MatAutocompleteModule,
     ReactiveFormsModule,
     CepAutocompleteDirective,
+    CepMaskDirective,
   ],
   templateUrl: "./cep-autocomplete.component.html",
   styleUrl: "./cep-autocomplete.component.css",
 })
 export class CepAutocompleteComponent {
-  endpoint = signal<string>("");
-  optionSelected = output<any>();
   control = input<FormControl<any>>(new FormControl());
-
-  setEndpoint(value: string) {
-    const cep = value.replace(/\D/g, "");
-    this.endpoint.set(`https://viacep.com.br/ws/${cep}/json`);
+  onSelect(value: any) {
+    console.log("Selecionado:", value);
   }
-
-  formatPixKeyDisplay = (item: any): string => {
-    return item?.cep || "";
-  };
 }
