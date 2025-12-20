@@ -5,6 +5,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { BaseAutocompleteDirective } from "../../directives/auto-complete.directive";
 import { CepInputFormatDirective } from "../../directives/cep-format.directive";
+import { CepAutocompleteDirective } from "../../directives/cep-autocomplete.directive";
 
 @Component({
   selector: "cep-autocomplete",
@@ -12,9 +13,8 @@ import { CepInputFormatDirective } from "../../directives/cep-format.directive";
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    BaseAutocompleteDirective,
     ReactiveFormsModule,
-    CepInputFormatDirective,
+    CepAutocompleteDirective,
   ],
   templateUrl: "./cep-autocomplete.component.html",
   styleUrl: "./cep-autocomplete.component.css",
@@ -30,12 +30,6 @@ export class CepAutocompleteComponent {
   }
 
   formatPixKeyDisplay = (item: any): string => {
-    if (!item) return "";
-
-    if (item.owner) {
-      return `${item.cep}`;
-    }
-
-    return "";
+    return item?.cep || "";
   };
 }

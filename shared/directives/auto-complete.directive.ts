@@ -10,6 +10,8 @@ import {
   Input,
   input,
   output,
+  signal,
+  computed,
 } from "@angular/core";
 
 import { FormControl } from "@angular/forms";
@@ -18,6 +20,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
+  Observable,
   of,
   switchMap,
   tap,
@@ -25,85 +28,49 @@ import {
 import { AutocompleteService } from "../services/auto-complete.service";
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 
-@Directive({
-  selector: "[baseAutocomplete]",
-  standalone: true,
-  exportAs: "baseAutocompleteApi",
-  providers: [
-    {
-      provide: "baseAutocompleteApi",
-      useExisting: forwardRef(() => BaseAutocompleteDirective),
-    },
-  ],
-})
-export class BaseAutocompleteDirective implements OnInit {
-  private _service = inject(AutocompleteService);
+import { InjectionToken } from "@angular/core";
 
-  endpoint = input.required<string>();
-  displayKey = input<string>();
-  displayFn = input<(item: any) => string>();
-  control = input<FormControl<string>>();
+export const AUTOCOMPLETE_DS = new InjectionToken<AutocompleteDataSource<any>>(
+  "AUTOCOMPLETE_DATA_SOURCE"
+);
 
-  optionSelected = output<any>();
+export interface AutocompleteDataSource<T> {
+  search(term: string): Observable<T[]>;
+}
 
-  results: any[] = [];
-  loading = false;
-  searchPerformed = false;
+@Directive()
+export abstract class BaseAutocompleteDirective<T> implements OnInit {
+  protected dataSource = inject<AutocompleteDataSource<T>>(AUTOCOMPLETE_DS);
+
+  control = input.required<FormControl<string>>();
+  minChars = input(2);
+
+  results = signal<T[]>([]);
+  loading = signal(false);
+  searched = signal(false);
+
+  showNoResults = computed(
+    () => this.searched() && !this.loading() && this.results().length === 0
+  );
 
   ngOnInit() {
-    this.listenToTyping();
-  }
-
-  private listenToTyping() {
     this.control()
-      ?.valueChanges.pipe(
-        filter((v) => !!v && v.length > 1),
+      .valueChanges.pipe(
+        filter((v) => !!v && v.length >= this.minChars()),
         debounceTime(300),
         distinctUntilChanged(),
         tap(() => {
-          this.loading = true;
-          this.searchPerformed = false;
+          this.loading.set(true);
+          this.searched.set(false);
         }),
         switchMap((term) =>
-          this._service.search(this.endpoint(), term!).pipe(
-            catchError((error) => {
-              console.log("Erro na busca:", error);
-              return of([]);
-            })
-          )
-        ),
-        tap(() => {
-          this.loading = false;
-          this.searchPerformed = true;
-        })
+          this.dataSource.search(term!).pipe(catchError(() => of([])))
+        )
       )
       .subscribe((res) => {
-        this.results = (Array.isArray(res) ? res : (res as any).results) ?? [];
+        this.results.set(res);
+        this.loading.set(false);
+        this.searched.set(true);
       });
-  }
-
-  onSelect(event: MatAutocompleteSelectedEvent) {
-    this.optionSelected.emit(event.option.value);
-  }
-
-  format(item: any): string {
-    if (!item) return "";
-
-    const displayFnValue = this.displayFn();
-    if (displayFnValue) {
-      return displayFnValue(item);
-    }
-
-    const key = this.displayKey();
-    console.log(key, `key `);
-    if (key) {
-      return item[key];
-    }
-    console.log(item, `vazio `);
-    return "";
-  }
-
-  shouldShowNoResults(): boolean {
-    return this.searchPerformed && !this.loading && this.results.length === 0;
   }
 }
