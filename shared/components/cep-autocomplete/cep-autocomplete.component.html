@@ -1,10 +1,10 @@
 <mat-form-field class="example-full-width">
-  <mat-label>Chave Pix</mat-label>
+  <mat-label>CEP</mat-label>
 
-  <input matInput placeholder="Digite a chave pix" pixKeyInputFormat baseAutocomplete
-    [endpoint]="endpoint + autoInput.value" displayKey="key" [displayFn]="formatPixKeyDisplay"
-    (optionSelected)="optionSelected.emit($event)" [formControl]="control()" [control]="control()"
-    [matAutocomplete]="auto" #dir="baseAutocompleteApi" #autoInput />
+  <input matInput placeholder="Digite o CEP" cepInputFormat baseAutocomplete [endpoint]="endpoint()" displayKey="key"
+    [displayFn]="formatPixKeyDisplay" (optionSelected)="optionSelected.emit($event)" [formControl]="control()"
+    [control]="control()" [matAutocomplete]="auto" #dir="baseAutocompleteApi" #autoInput
+    (input)="setEndpoint(autoInput.value)" />
 
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="dir.onSelect($event)" [displayWith]="dir.format.bind(dir)"
     [displayWith]="dir.format.bind(dir)">

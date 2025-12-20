@@ -1,17 +1,20 @@
 <mat-form-field class="example-full-width">
-  <mat-label>{{ label() }}</mat-label>
+  <mat-label>Personagem</mat-label>
 
-  <input matInput [placeholder]="placeholder()" baseAutocomplete endpoint="https://rickandmortyapi.com/api/character"
-    [displayKey]="displayKey()" [subDisplayKey]="subDisplayKey()" [params]="params()"
-    (optionSelected)="optionSelected.emit($event)" [formControl]="control()" [control]="control()"
-    [matAutocomplete]="auto" #dir="baseAutocompleteApi" />
+  <input matInput placeholder="Digite a chave pix" baseAutocomplete [endpoint]="endpoint()" displayKey="key"
+    [displayFn]="formatDisplay" (optionSelected)="optionSelected.emit($event)" [formControl]="control()"
+    [control]="control()" [matAutocomplete]="auto" #dir="baseAutocompleteApi" #autoInput
+    (input)="setEndpoint(autoInput.value)" />
 
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="dir.onSelect($event)"
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="dir.onSelect($event)" [displayWith]="dir.format.bind(dir)"
     [displayWith]="dir.format.bind(dir)">
     @for (item of dir.results; track item.id) {
     <mat-option [value]="item">
-      {{ dir.format(item) }}
+      {{ dir.format(item)}}
     </mat-option>
     }
   </mat-autocomplete>
+  @if (dir.shouldShowNoResults()) {
+  <mat-hint>Nenhum resultado encontrado</mat-hint>
+  }
 </mat-form-field>

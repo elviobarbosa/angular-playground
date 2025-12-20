@@ -4,46 +4,36 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { BaseAutocompleteDirective } from "../../directives/auto-complete.directive";
-import { JsonPipe } from "@angular/common";
-
-import { HttpParams } from "@angular/common/http";
+import { CepInputFormatDirective } from "../../directives/cep-format.directive";
 
 @Component({
-  selector: "base-autocomplete",
+  selector: "cep-autocomplete",
   imports: [
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
     BaseAutocompleteDirective,
     ReactiveFormsModule,
+    CepInputFormatDirective,
   ],
-  templateUrl: "./base-autocomplete.component.html",
-  styleUrl: "./base-autocomplete.component.css",
+  templateUrl: "./cep-autocomplete.component.html",
+  styleUrl: "./cep-autocomplete.component.css",
 })
-export class BaseAutocompleteComponent {
-  label = input<string>("");
-  placeholder = input<string>("");
+export class CepAutocompleteComponent {
   endpoint = signal<string>("");
-
-  displayKey = input<string>("label");
-  subDisplayKey = input<string>("");
-
   optionSelected = output<any>();
-
   control = input<FormControl<any>>(new FormControl());
 
   setEndpoint(value: string) {
-    const params = new HttpParams().set("name", value);
-    this.endpoint.set(
-      `https://rickandmortyapi.com/api/character/?${params.toString()}`
-    );
+    const cep = value.replace(/\D/g, "");
+    this.endpoint.set(`https://viacep.com.br/ws/${cep}/json`);
   }
 
-  formatDisplay = (item: any): string => {
+  formatPixKeyDisplay = (item: any): string => {
     if (!item) return "";
 
-    if (item.name) {
-      return `${item.name} - ${item.species}`;
+    if (item.owner) {
+      return `${item.cep}`;
     }
 
     return "";

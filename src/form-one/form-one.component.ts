@@ -16,6 +16,7 @@ import {
 } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { PixAutoCompleteComponent } from "../../shared/components/pix-auto-complete/pix-auto-complete.component";
+import { CepAutocompleteComponent } from "../../shared/components/cep-autocomplete/cep-autocomplete.component";
 
 @Component({
   selector: "app-form-one",
@@ -27,6 +28,7 @@ import { PixAutoCompleteComponent } from "../../shared/components/pix-auto-compl
     MatFormFieldModule,
     MatInputModule,
     PixAutoCompleteComponent,
+    CepAutocompleteComponent,
   ],
   templateUrl: "./form-one.component.html",
   styleUrl: "./form-one.component.css",

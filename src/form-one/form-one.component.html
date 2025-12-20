@@ -10,12 +10,15 @@
 ===================================
 <div>
   <form [formGroup]="form">
-    <base-autocomplete endpoint="https://rickandmortyapi.com/api/character" label="Personagem" displayKey="name"
-      subDisplayKey="status" [control]="form.controls.personagem" (optionSelected)="foo($event)" />
+    <base-autocomplete [control]="form.controls.personagem" />
   </form>
   {{form.getRawValue() | json}}
 </div>
 ===================================
 <div>
   <pix-auto-complete />
+</div>
+
+<div>
+  <cep-autocomplete />
 </div>
