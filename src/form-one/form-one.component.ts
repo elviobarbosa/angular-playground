@@ -6,31 +6,26 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { BaseAutocompleteComponent } from "../../shared/components/base-autocomplete/base-autocomplete.component";
 import { JsonPipe } from "@angular/common";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import {
-  MatFormField,
-  MatFormFieldModule,
-  MatLabel,
-} from "@angular/material/form-field";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { PixAutoCompleteComponent } from "../../shared/components/pix-auto-complete/pix-auto-complete.component";
 import { CepAutocompleteComponent } from "../../shared/components/cep-autocomplete/component/cep-autocomplete.component";
 import { RickMortyComponent } from "../../shared/components/rick-morty/component/rick-morty.component";
+import { PixAutoCompleteComponent } from "../../shared/components/pix-auto-complete-deprecated/pix-auto-complete.component";
+import { PixAutocompleteComponent } from "../../shared/components/pix-autocomplete/component/pix-autocomplete.component";
 
 @Component({
   selector: "app-form-one",
   imports: [
     ReactiveFormsModule,
-    BaseAutocompleteComponent,
     JsonPipe,
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    PixAutoCompleteComponent,
     CepAutocompleteComponent,
     RickMortyComponent,
+    PixAutocompleteComponent,
   ],
   templateUrl: "./form-one.component.html",
   styleUrl: "./form-one.component.css",

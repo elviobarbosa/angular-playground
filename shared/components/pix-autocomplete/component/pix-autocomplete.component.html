@@ -1,0 +1,26 @@
+<mat-form-field>
+  <mat-label>Pix</mat-label>
+
+  <input matInput [formControl]="control()" pixAutocomplete status="alive" #api="pixAutocompleteApi"
+    [matAutocomplete]="auto" />
+
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayItem">
+    @for (item of api.results(); track item.key) {
+    <mat-option [value]="item">
+      {{ item.key | pixKeyFormat }} — {{ item.owner }}
+    </mat-option>
+    }
+
+
+  </mat-autocomplete>
+
+  @if (api.showNoResults() || api.loading()) {
+  <mat-hint>
+    @if (api.showNoResults()) {
+    Nenhum personagem encontrado
+    } @else {
+    Buscando no multiverso...
+    }
+  </mat-hint>
+  }
+</mat-form-field>

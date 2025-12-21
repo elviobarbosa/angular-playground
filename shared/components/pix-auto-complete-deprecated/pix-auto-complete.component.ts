@@ -15,7 +15,6 @@ import { PixKeyInputFormatDirective } from "../../directives/pix-format-input.di
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    PixKeyInputFormatDirective,
   ],
   templateUrl: "./pix-auto-complete.component.html",
   styleUrl: "./pix-auto-complete.component.css",
