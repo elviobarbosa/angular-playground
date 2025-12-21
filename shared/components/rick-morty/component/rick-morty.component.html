@@ -1,0 +1,26 @@
+<mat-form-field>
+  <mat-label>Personagem</mat-label>
+
+  <input matInput [formControl]="control()" rickAndMortyAutocomplete status="alive" #api="rickMortyApi"
+    [matAutocomplete]="auto" />
+
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCharacter">
+    @for (item of api.results(); track item.id) {
+    <mat-option [value]="item">
+      {{ item.name }} — {{ item.species }}
+    </mat-option>
+    }
+
+
+  </mat-autocomplete>
+
+  @if (api.showNoResults() || api.loading()) {
+  <mat-hint>
+    @if (api.showNoResults()) {
+    Nenhum personagem encontrado
+    } @else {
+    Buscando no multiverso...
+    }
+  </mat-hint>
+  }
+</mat-form-field>

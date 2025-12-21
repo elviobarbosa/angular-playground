@@ -10,7 +10,7 @@
 ===================================
 <div>
   <form [formGroup]="form">
-    <base-autocomplete [control]="form.controls.personagem" />
+    <rick-morty-autocomplete [control]="form.controls.personagem" />
   </form>
   {{form.getRawValue() | json}}
 </div>

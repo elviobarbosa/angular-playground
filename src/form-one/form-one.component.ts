@@ -17,6 +17,7 @@ import {
 import { MatInputModule } from "@angular/material/input";
 import { PixAutoCompleteComponent } from "../../shared/components/pix-auto-complete/pix-auto-complete.component";
 import { CepAutocompleteComponent } from "../../shared/components/cep-autocomplete/component/cep-autocomplete.component";
+import { RickMortyComponent } from "../../shared/components/rick-morty/component/rick-morty.component";
 
 @Component({
   selector: "app-form-one",
@@ -29,6 +30,7 @@ import { CepAutocompleteComponent } from "../../shared/components/cep-autocomple
     MatInputModule,
     PixAutoCompleteComponent,
     CepAutocompleteComponent,
+    RickMortyComponent,
   ],
   templateUrl: "./form-one.component.html",
   styleUrl: "./form-one.component.css",

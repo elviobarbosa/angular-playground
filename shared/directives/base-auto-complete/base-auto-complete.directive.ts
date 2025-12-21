@@ -26,7 +26,7 @@ import {
 @Directive()
 export abstract class BaseAutocompleteDirective<T> implements OnInit {
   protected dataSource = inject<AutocompleteDataSource<T>>(AUTOCOMPLETE_DS);
-  private ngControl = inject(NgControl);
+  protected ngControl = inject(NgControl);
 
   minChars = input(2);
 
