@@ -6,15 +6,18 @@ import {
   input,
   signal,
 } from "@angular/core";
-import { BaseAutocompleteDirective } from "../../../directives/base-auto-complete/base-auto-complete.directive";
+
 import { RickMortyDataSource } from "./rick-morty.service";
-import { AUTOCOMPLETE_DS } from "../../../directives/base-auto-complete/base-auto-complete.entities";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
 import {
-  AUTOCOMPLETE_PARAMS,
   AutocompleteParams,
   RickAndMortyCharacter,
 } from "./rick-morty.entities";
+import { BaseAutocompleteDirective } from "../../../autocomplete-lib/core/base-autocomplete.directive";
+import {
+  AUTOCOMPLETE_DATA_SOURCE,
+  AUTOCOMPLETE_PARAMS,
+} from "../../../autocomplete-lib/core/tokens";
 
 @Directive({
   selector: "[rickAndMortyAutocomplete]",
@@ -22,7 +25,7 @@ import {
   providers: [
     RickMortyDataSource,
     {
-      provide: AUTOCOMPLETE_DS,
+      provide: AUTOCOMPLETE_DATA_SOURCE,
       useClass: RickMortyDataSource,
     },
     {
@@ -34,14 +37,14 @@ import {
 })
 export class RickMortyDirective extends BaseAutocompleteDirective<RickAndMortyCharacter> {
   private paramsSignal = inject(AUTOCOMPLETE_PARAMS);
-  private destroyRef = inject(DestroyRef);
+  private _destroyRef = inject(DestroyRef);
 
   status = input<AutocompleteParams["status"]>("alive");
 
   constructor() {
     super();
     toObservable(this.status)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((statusValue) => {
         const params: AutocompleteParams = {};
         if (statusValue) {

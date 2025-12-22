@@ -10,17 +10,9 @@
       {{ item.key | pixKeyFormat }} — {{ item.owner }}
     </mat-option>
     }
-
-
   </mat-autocomplete>
 
-  @if (api.showNoResults() || api.loading()) {
   <mat-hint>
-    @if (api.showNoResults()) {
-    Nenhum personagem encontrado
-    } @else {
-    Buscando no multiverso...
-    }
+    <autocomplete-hint [api]="api" />
   </mat-hint>
-  }
 </mat-form-field>

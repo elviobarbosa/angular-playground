@@ -16,7 +16,3 @@ export interface AutocompleteParams {
   species?: string;
   gender?: string;
 }
-
-export const AUTOCOMPLETE_PARAMS = new InjectionToken<
-  WritableSignal<AutocompleteParams>
->("AUTOCOMPLETE_PARAMS");

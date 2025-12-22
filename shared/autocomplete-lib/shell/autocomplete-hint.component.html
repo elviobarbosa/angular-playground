@@ -1,0 +1,21 @@
+@if (api().loading()) {
+<ng-container *ngTemplateOutlet="loadingTpl ?? defaultLoading">
+</ng-container>
+}
+
+@if (api().showNoResults()) {
+<ng-container *ngTemplateOutlet="emptyTpl ?? defaultEmpty">
+</ng-container>
+}
+
+<ng-template #defaultLoading>
+  {{ loadingText() }}
+</ng-template>
+
+<ng-template #defaultEmpty>
+  {{ emptyText() }}
+</ng-template>
+
+<ng-template #defaultError>
+  {{ errorText() }}
+</ng-template>

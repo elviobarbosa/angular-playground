@@ -1,10 +1,9 @@
 import { Directive } from "@angular/core";
-import { BaseAutocompleteDirective } from "../../../directives/base-auto-complete/base-auto-complete.directive";
 import { PixAutocompleteDataSource } from "./pix-autocomplete.service";
-import { AUTOCOMPLETE_DS } from "../../../directives/base-auto-complete/base-auto-complete.entities";
-
 import { PixResult } from "./pix-autocomplete.entities";
 import { PixKeyInputFormatDirective } from "../../../directives/pix-format-input.directive";
+import { BaseAutocompleteDirective } from "../../../autocomplete-lib/core/base-autocomplete.directive";
+import { AUTOCOMPLETE_DATA_SOURCE } from "../../../autocomplete-lib/core/tokens";
 
 @Directive({
   selector: "[pixAutocomplete]",
@@ -12,7 +11,7 @@ import { PixKeyInputFormatDirective } from "../../../directives/pix-format-input
   providers: [
     PixAutocompleteDataSource,
     {
-      provide: AUTOCOMPLETE_DS,
+      provide: AUTOCOMPLETE_DATA_SOURCE,
       useClass: PixAutocompleteDataSource,
     },
   ],

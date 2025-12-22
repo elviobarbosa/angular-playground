@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { catchError, map, Observable, of } from "rxjs";
 import { PixResult } from "./pix-autocomplete.entities";
-import { AutocompleteDataSource } from "../../../directives/base-auto-complete/base-auto-complete.entities";
+import { AutocompleteDataSource } from "../../../autocomplete-lib/core/autocomplete-data-source";
 
 @Injectable()
 export class PixAutocompleteDataSource

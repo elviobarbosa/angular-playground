@@ -1,16 +1,17 @@
 import { Directive } from "@angular/core";
-import { BaseAutocompleteDirective } from "../../../directives/base-auto-complete/base-auto-complete.directive";
 import { CepAutocompleteDataSource } from "./cep.service";
 import { CepResult } from "./cep.entities";
-import { AUTOCOMPLETE_DS } from "../../../directives/base-auto-complete/base-auto-complete.entities";
+
 import { CepMaskDirective } from "./cep-mask.directive";
+import { AUTOCOMPLETE_DATA_SOURCE } from "../../../autocomplete-lib/core/tokens";
+import { BaseAutocompleteDirective } from "../../../autocomplete-lib/core/base-autocomplete.directive";
 
 @Directive({
   selector: "[cepAutocomplete]",
   standalone: true,
   providers: [
     {
-      provide: AUTOCOMPLETE_DS,
+      provide: AUTOCOMPLETE_DATA_SOURCE,
       useClass: CepAutocompleteDataSource,
     },
   ],

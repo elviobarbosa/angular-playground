@@ -12,6 +12,7 @@
   <form [formGroup]="form">
     <rick-morty-autocomplete [control]="form.controls.personagem" />
   </form>
+  <br><br>
   {{form.getRawValue() | json}}
 </div>
 ===================================

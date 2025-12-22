@@ -11,8 +11,9 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { CepAutocompleteComponent } from "../../shared/components/cep-autocomplete/component/cep-autocomplete.component";
-import { RickMortyComponent } from "../../shared/components/rick-morty/component/rick-morty.component";
+
 import { PixAutocompleteComponent } from "../../shared/components/pix-autocomplete/component/pix-autocomplete.component";
+import { RickMortyAutocompleteComponent } from "../../shared/components/rick-morty/component/rick-morty.component";
 
 @Component({
   selector: "app-form-one",
@@ -23,7 +24,7 @@ import { PixAutocompleteComponent } from "../../shared/components/pix-autocomple
     MatFormFieldModule,
     MatInputModule,
     CepAutocompleteComponent,
-    RickMortyComponent,
+    RickMortyAutocompleteComponent,
     PixAutocompleteComponent,
   ],
   templateUrl: "./form-one.component.html",

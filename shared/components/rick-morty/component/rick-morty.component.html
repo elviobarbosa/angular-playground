@@ -10,17 +10,18 @@
       {{ item.name }} — {{ item.species }}
     </mat-option>
     }
-
-
   </mat-autocomplete>
 
-  @if (api.showNoResults() || api.loading()) {
   <mat-hint>
-    @if (api.showNoResults()) {
-    Nenhum personagem encontrado
-    } @else {
-    Buscando no multiverso...
-    }
+    <autocomplete-hint [api]="api">
+      <ng-template #loading>
+        🌀 Abrindo portal…
+      </ng-template>
+
+      <ng-template #empty>
+        Ninguém nessa dimensão
+      </ng-template>
+    </autocomplete-hint>
   </mat-hint>
-  }
+
 </mat-form-field>

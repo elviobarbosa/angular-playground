@@ -1,11 +1,9 @@
 import { computed, inject, Injectable, signal } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { catchError, map, Observable, of } from "rxjs";
-import {
-  AUTOCOMPLETE_PARAMS,
-  RickAndMortyCharacter,
-} from "./rick-morty.entities";
-import { AutocompleteDataSource } from "../../../directives/base-auto-complete/base-auto-complete.entities";
+import { RickAndMortyCharacter } from "./rick-morty.entities";
+import { AUTOCOMPLETE_PARAMS } from "../../../autocomplete-lib/core/tokens";
+import { AutocompleteDataSource } from "../../../autocomplete-lib/core/autocomplete-data-source";
 
 @Injectable()
 export class RickMortyDataSource
@@ -29,6 +27,17 @@ export class RickMortyDataSource
       .get<any>("https://rickandmortyapi.com/api/character", {
         params: new HttpParams({ fromObject: searchParams }),
       })
-      .pipe(map((res) => res.results ?? []));
+      .pipe(
+        map((res) => {
+          if (res.error) {
+            return [];
+          }
+          return res.results ?? [];
+        }),
+        catchError((err) => {
+          console.error("Erro na requisição:", err);
+          return of([]);
+        })
+      );
   }
 }

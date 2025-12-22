@@ -9,6 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { PixAutocompleteDirective } from "../services/pix-autocomplete.directive";
 import { PixResult } from "../services/pix-autocomplete.entities";
 import { PixKeyFormatPipe } from "../../../pipes/pix-key-format.pipe";
+import { AutocompleteHintComponent } from "../../../autocomplete-lib/shell/autocomplete-hint.component";
 
 @Component({
   selector: "pix-autocomplete",
@@ -19,6 +20,7 @@ import { PixKeyFormatPipe } from "../../../pipes/pix-key-format.pipe";
     ReactiveFormsModule,
     PixAutocompleteDirective,
     PixKeyFormatPipe,
+    AutocompleteHintComponent,
   ],
   templateUrl: "./pix-autocomplete.component.html",
   styleUrl: "./pix-autocomplete.component.css",
@@ -33,8 +35,8 @@ export class PixAutocompleteComponent {
   }
 
   displayItem = (item: PixResult) => {
-    const key = item.key;
-    const formattedKey = this._pixKeyPipe.transform(key, item.type);
+    const key = item?.key;
+    const formattedKey = this._pixKeyPipe.transform(key, item?.type);
 
     if (!item) return "";
     if (typeof item === "string") {

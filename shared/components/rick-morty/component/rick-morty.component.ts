@@ -7,33 +7,23 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { RickMortyDirective } from "../services/rick-morty.directive";
+import { AutocompleteHintComponent } from "../../../autocomplete-lib/shell/autocomplete-hint.component";
 
 @Component({
   selector: "rick-morty-autocomplete",
+  standalone: true,
   imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
     ReactiveFormsModule,
     RickMortyDirective,
+    MatInputModule,
+    MatAutocompleteModule,
+    AutocompleteHintComponent,
   ],
   templateUrl: "./rick-morty.component.html",
-  styleUrl: "./rick-morty.component.css",
 })
-export class RickMortyComponent {
-  control = input<FormControl<any>>(new FormControl());
-  onSelect(event: MatAutocompleteSelectedEvent) {
-    const value = event.option.value;
+export class RickMortyAutocompleteComponent {
+  control = input(new FormControl());
 
-    this.control().setValue(value, { emitEvent: false });
-  }
-
-  displayCharacter = (item: any) => {
-    if (!item) return "";
-    if (typeof item === "string") {
-      return item;
-    }
-
-    return `${item.name} — ${item.species}`;
-  };
+  displayCharacter = (item: any): string =>
+    item ? `${item.name} — ${item.species}` : "";
 }
