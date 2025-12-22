@@ -3,6 +3,7 @@ import { BaseAutocompleteDirective } from "../../../directives/base-auto-complet
 import { CepAutocompleteDataSource } from "./cep.service";
 import { CepResult } from "./cep.entities";
 import { AUTOCOMPLETE_DS } from "../../../directives/base-auto-complete/base-auto-complete.entities";
+import { CepMaskDirective } from "./cep-mask.directive";
 
 @Directive({
   selector: "[cepAutocomplete]",
@@ -13,6 +14,7 @@ import { AUTOCOMPLETE_DS } from "../../../directives/base-auto-complete/base-aut
       useClass: CepAutocompleteDataSource,
     },
   ],
+  hostDirectives: [CepMaskDirective],
   exportAs: "cepAuto",
 })
 export class CepAutocompleteDirective extends BaseAutocompleteDirective<CepResult> {}

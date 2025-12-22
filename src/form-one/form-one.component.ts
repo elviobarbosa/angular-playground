@@ -12,7 +12,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { CepAutocompleteComponent } from "../../shared/components/cep-autocomplete/component/cep-autocomplete.component";
 import { RickMortyComponent } from "../../shared/components/rick-morty/component/rick-morty.component";
-import { PixAutoCompleteComponent } from "../../shared/components/pix-auto-complete-deprecated/pix-auto-complete.component";
 import { PixAutocompleteComponent } from "../../shared/components/pix-autocomplete/component/pix-autocomplete.component";
 
 @Component({

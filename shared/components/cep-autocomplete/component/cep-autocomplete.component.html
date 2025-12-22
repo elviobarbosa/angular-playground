@@ -1,7 +1,7 @@
 <mat-form-field>
   <mat-label>CEP</mat-label>
 
-  <input matInput cepMask [formControl]="control()" cepAutocomplete #api="cepAuto" />
+  <input matInput [formControl]="control()" cepAutocomplete [minChars]="6" #api="cepAuto" />
 
   <mat-autocomplete (optionSelected)="onSelect($event.option.value)">
     @for (item of api.results(); track item.cep) {
