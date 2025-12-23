@@ -1,0 +1,9 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Data nascimento</mat-label>
+  <input matInput brDateInput separator="-" [min]="normalizedMin()" [max]="normalizedMax()" [matDatepicker]="picker"
+    placeholder="dd/mm/aaaa" [formControl]="control()">
+  <mat-hint></mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+
+</mat-form-field>

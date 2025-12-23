@@ -4,6 +4,10 @@ import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { ContainerComponent } from "./container/container/container.component";
 import { mockInterceptor } from "./mocks/mock.interceptors";
 import { provideNgxMask } from "ngx-mask";
+import {
+  MAT_DATE_LOCALE,
+  provideNativeDateAdapter,
+} from "@angular/material/core";
 
 @Component({
   selector: "app-root",
@@ -16,7 +20,9 @@ export class App {
 
 bootstrapApplication(App, {
   providers: [
+    provideNativeDateAdapter(),
     provideHttpClient(withInterceptors([mockInterceptor])),
     provideNgxMask(),
+    { provide: MAT_DATE_LOCALE, useValue: "pt-BR" },
   ],
 });

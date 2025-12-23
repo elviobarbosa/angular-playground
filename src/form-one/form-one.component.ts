@@ -15,6 +15,7 @@ import { CepAutocompleteComponent } from "../../shared/components/cep-autocomple
 import { PixAutocompleteComponent } from "../../shared/components/pix-autocomplete/component/pix-autocomplete.component";
 import { RickMortyAutocompleteComponent } from "../../shared/components/rick-morty/component/rick-morty.component";
 import { SelectRickMortyComponent } from "../../shared/components/select-rick-morty/component/select-rick-morty.component";
+import { DatePickerComponent } from "../../shared/components/lib-datepicker/components/date-picker/component/date-picker.component";
 
 @Component({
   selector: "app-form-one",
@@ -28,6 +29,7 @@ import { SelectRickMortyComponent } from "../../shared/components/select-rick-mo
     RickMortyAutocompleteComponent,
     PixAutocompleteComponent,
     SelectRickMortyComponent,
+    DatePickerComponent,
   ],
   templateUrl: "./form-one.component.html",
   styleUrl: "./form-one.component.css",
@@ -44,6 +46,10 @@ export class FormOneComponent implements OnInit, OnDestroy {
 
   form = new FormGroup({
     personagem: new FormControl(null, Validators.required),
+    nascimento: new FormControl<string | Date | null>(
+      null,
+      Validators.required
+    ),
   });
 
   get parentFormGroup() {
@@ -65,6 +71,10 @@ export class FormOneComponent implements OnInit, OnDestroy {
 
   foo(any: any) {
     console.log(any);
+  }
+
+  setNascimento() {
+    this.form.get("nascimento")?.setValue("2026-01-01");
   }
 
   displayPersonagem(item: any) {

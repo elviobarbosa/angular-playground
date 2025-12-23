@@ -27,3 +27,8 @@
 <div>
   <select-rick-morty />
 </div>
+
+<div>
+  <date-picker [control]="form.controls.nascimento" min="2026-01-01" max="2026-01-22" />
+</div>
+<button (click)="setNascimento()">Set nascimento</button>
