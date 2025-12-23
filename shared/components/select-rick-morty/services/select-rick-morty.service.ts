@@ -1,27 +1,27 @@
 import { computed, inject, Injectable, signal } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { catchError, map, Observable, of } from "rxjs";
-import { RickAndMortyCharacter } from "./rick-morty.entities";
 import { AUTOCOMPLETE_PARAMS } from "../../../lib-autocomplete/core/tokens";
 import { AutocompleteDataSource } from "../../../lib-autocomplete/core/autocomplete-data-source";
+import { RickAndMortyCharacter } from "./select-rick-morty.entities";
+import { SelectDataSource } from "../../../lib-select/core/select-data-source";
+import { SELECT_PARAMS } from "../../../lib-select/core/tokens";
 
 @Injectable()
-export class RickMortyDataSource
-  implements AutocompleteDataSource<RickAndMortyCharacter>
+export class SelectRickMortyDataSource
+  implements SelectDataSource<RickAndMortyCharacter>
 {
   private http = inject(HttpClient);
-  private params = inject(AUTOCOMPLETE_PARAMS, { optional: true });
+  private params = inject(SELECT_PARAMS);
 
-  search(term: string) {
-    const searchParams: Record<string, string> = { name: term };
+  load(): Observable<RickAndMortyCharacter[]> {
+    const searchParams: Record<string, string> = {};
 
-    if (this.params) {
-      Object.entries(this.params()).forEach(([key, value]) => {
-        if (value != null) {
-          searchParams[key] = String(value);
-        }
-      });
-    }
+    Object.entries(this.params()).forEach(([key, value]) => {
+      if (value != null) {
+        searchParams[key] = String(value);
+      }
+    });
 
     return this.http
       .get<any>("https://rickandmortyapi.com/api/character", {
@@ -33,10 +33,6 @@ export class RickMortyDataSource
             return [];
           }
           return res.results ?? [];
-        }),
-        catchError((err) => {
-          console.error("Erro na requisição:", err);
-          return of([]);
         })
       );
   }

@@ -3,8 +3,8 @@ import { CepAutocompleteDataSource } from "./cep.service";
 import { CepResult } from "./cep.entities";
 
 import { CepMaskDirective } from "./cep-mask.directive";
-import { AUTOCOMPLETE_DATA_SOURCE } from "../../../autocomplete-lib/core/tokens";
-import { BaseAutocompleteDirective } from "../../../autocomplete-lib/core/base-autocomplete.directive";
+import { AUTOCOMPLETE_DATA_SOURCE } from "../../../lib-autocomplete/core/tokens";
+import { BaseAutocompleteDirective } from "../../../lib-autocomplete/core/base-autocomplete.directive";
 
 @Directive({
   selector: "[cepAutocomplete]",

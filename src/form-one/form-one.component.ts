@@ -14,6 +14,7 @@ import { CepAutocompleteComponent } from "../../shared/components/cep-autocomple
 
 import { PixAutocompleteComponent } from "../../shared/components/pix-autocomplete/component/pix-autocomplete.component";
 import { RickMortyAutocompleteComponent } from "../../shared/components/rick-morty/component/rick-morty.component";
+import { SelectRickMortyComponent } from "../../shared/components/select-rick-morty/component/select-rick-morty.component";
 
 @Component({
   selector: "app-form-one",
@@ -26,6 +27,7 @@ import { RickMortyAutocompleteComponent } from "../../shared/components/rick-mor
     CepAutocompleteComponent,
     RickMortyAutocompleteComponent,
     PixAutocompleteComponent,
+    SelectRickMortyComponent,
   ],
   templateUrl: "./form-one.component.html",
   styleUrl: "./form-one.component.css",

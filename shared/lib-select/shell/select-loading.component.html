@@ -1,0 +1,8 @@
+@if (api().loading()) {
+<ng-container *ngTemplateOutlet="loadingTpl ?? defaultLoading">
+</ng-container>
+}
+
+<ng-template #defaultLoading>
+  <mat-progress-bar mode="indeterminate" color="accent" style="position: absolute; bottom: 0; left: 0; right: 0;" />
+</ng-template>

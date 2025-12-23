@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 import { CepResult } from "./cep.entities";
-import { AutocompleteDataSource } from "../../../autocomplete-lib/core/autocomplete-data-source";
+import { AutocompleteDataSource } from "../../../lib-autocomplete/core/autocomplete-data-source";
 
 @Injectable()
 export class CepAutocompleteDataSource

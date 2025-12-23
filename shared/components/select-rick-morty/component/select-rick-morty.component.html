@@ -1,0 +1,14 @@
+<mat-form-field>
+  <mat-label>Lista de personagens</mat-label>
+  <mat-select rickAndMortySelect #api="selectRickMortyApi" [status]="statusFilter()" [species]="speciesFilter()"
+    [formControl]="control()">
+
+    @for (item of api.results(); track item.id) {
+    <mat-option [value]="item">
+      {{ item.name }} — {{ item.species }}
+    </mat-option>
+    }
+  </mat-select>
+  <select-loading [api]="api" />
+
+</mat-form-field>

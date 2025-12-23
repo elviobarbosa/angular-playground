@@ -38,7 +38,6 @@ export abstract class BaseAutocompleteDirective<T> implements OnInit {
     return this.ngControl?.control as FormControl;
   }
 
-  // control = input.required<FormControl<string>>();
   minChars = input(2);
   debounce = input(300);
   displayTime = input(5000);

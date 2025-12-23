@@ -13,11 +13,11 @@ import {
   AutocompleteParams,
   RickAndMortyCharacter,
 } from "./rick-morty.entities";
-import { BaseAutocompleteDirective } from "../../../autocomplete-lib/core/base-autocomplete.directive";
+import { BaseAutocompleteDirective } from "../../../lib-autocomplete/core/base-autocomplete.directive";
 import {
   AUTOCOMPLETE_DATA_SOURCE,
   AUTOCOMPLETE_PARAMS,
-} from "../../../autocomplete-lib/core/tokens";
+} from "../../../lib-autocomplete/core/tokens";
 
 @Directive({
   selector: "[rickAndMortyAutocomplete]",

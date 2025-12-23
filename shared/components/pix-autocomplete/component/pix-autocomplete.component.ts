@@ -9,7 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { PixAutocompleteDirective } from "../services/pix-autocomplete.directive";
 import { PixResult } from "../services/pix-autocomplete.entities";
 import { PixKeyFormatPipe } from "../../../pipes/pix-key-format.pipe";
-import { AutocompleteHintComponent } from "../../../autocomplete-lib/shell/autocomplete-hint.component";
+import { AutocompleteHintComponent } from "../../../lib-autocomplete/shell/autocomplete-hint.component";
 
 @Component({
   selector: "pix-autocomplete",

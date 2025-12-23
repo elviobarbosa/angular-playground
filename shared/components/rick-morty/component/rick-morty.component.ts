@@ -7,7 +7,7 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { RickMortyDirective } from "../services/rick-morty.directive";
-import { AutocompleteHintComponent } from "../../../autocomplete-lib/shell/autocomplete-hint.component";
+import { AutocompleteHintComponent } from "../../../lib-autocomplete/shell/autocomplete-hint.component";
 
 @Component({
   selector: "rick-morty-autocomplete",

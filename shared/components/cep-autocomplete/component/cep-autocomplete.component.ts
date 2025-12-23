@@ -17,7 +17,6 @@ import { JsonPipe } from "@angular/common";
     ReactiveFormsModule,
     CepAutocompleteDirective,
     CepMaskDirective,
-    JsonPipe,
   ],
   templateUrl: "./cep-autocomplete.component.html",
   styleUrl: "./cep-autocomplete.component.css",
